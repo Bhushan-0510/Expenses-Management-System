@@ -35,22 +35,22 @@ export default function LoginPage() {
   const isSignup = mode === "signup";
 
   return (
-    <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light px-4">
-      <div className="card w-100 p-4 p-md-5" style={{maxWidth: '480px'}}>
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
+      <div className="bg-white w-full p-4 md:p-6 rounded-lg shadow" style={{ maxWidth: "480px" }}>
         <div className="mb-4">
-          <p className="small fw-semibold text-uppercase text-muted">
+          <p className="text-xs font-semibold uppercase text-gray-500">
             {isSignup ? "Create account" : "Welcome back"}
           </p>
-          <h1 className="mt-1 h5 fw-semibold text-dark">
+          <h1 className="mt-1 text-lg font-semibold text-gray-900">
             {isSignup ? "Sign up to get started" : "Sign in to continue"}
           </h1>
-          <p className="mt-1 small text-muted">
+          <p className="mt-1 text-sm text-gray-500">
             Track your spending with a calm, focused dashboard.
           </p>
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="mb-3">
+          <div className="mb-4">
             <Label htmlFor="email">Email</Label>
             <TextInput
               id="email"
@@ -61,9 +61,9 @@ export default function LoginPage() {
               placeholder="you@example.com"
             />
           </div>
-          <div className="mb-3">
+          <div className="mb-4">
             <Label htmlFor="password">Password</Label>
-            <div className="position-relative">
+            <div className="relative">
               <TextInput
                 id="password"
                 type={showPassword ? "text" : "password"}
@@ -76,37 +76,37 @@ export default function LoginPage() {
               <button
                 type="button"
                 onClick={() => setShowPassword((v) => !v)}
-                className="position-absolute top-50 end-0 translate-middle-y btn btn-link small text-decoration-none"
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-sm text-slate-600 hover:underline bg-transparent"
               >
                 {showPassword ? "Hide" : "Show"}
               </button>
             </div>
           </div>
-          <div className="form-check mb-2">
+          <div className="flex items-center mb-4">
             <input
-              type="checkbox"
-              className="form-check-input"
               id="rememberMe"
+              type="checkbox"
+              className="h-4 w-4 rounded border-gray-300 text-slate-900"
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
             />
-            <label className="form-check-label small" htmlFor="rememberMe">
+            <label className="ml-2 text-sm text-gray-600" htmlFor="rememberMe">
               Remember me on this device
             </label>
           </div>
-          {error && <p className="small text-danger">{error}</p>}
-          <Button type="submit" className="w-100 mt-2" disabled={loading}>
+          {error && <p className="text-sm text-red-600">{error}</p>}
+          <Button type="submit" className="w-full mt-2" disabled={loading}>
             {loading ? (isSignup ? "Creating account..." : "Signing in...") : isSignup ? "Sign up" : "Sign in"}
           </Button>
         </form>
 
-        <div className="mt-4 small text-muted text-center">
+        <div className="mt-4 text-sm text-gray-500 text-center">
           {isSignup ? (
             <>
               Already have an account? {" "}
               <button
                 type="button"
-                className="btn btn-link p-0"
+                className="text-slate-900 font-medium hover:underline p-0"
                 onClick={() => setMode("login")}
               >
                 Sign in
@@ -117,7 +117,7 @@ export default function LoginPage() {
               New here? {" "}
               <button
                 type="button"
-                className="btn btn-link p-0"
+                className="text-slate-900 font-medium hover:underline p-0"
                 onClick={() => setMode("signup")}
               >
                 Create an account

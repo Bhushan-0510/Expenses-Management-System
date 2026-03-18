@@ -16,10 +16,10 @@ export default function Navbar({ onLogout }) {
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-xl bg-slate-900 flex items-center justify-center text-white text-sm font-semibold">
-            PE
+            HK
           </div>
           <div>
-            <p className="text-sm font-semibold text-slate-900">VAHI KHATA</p>
+            <p className="text-sm font-semibold text-slate-900">HisabKitab</p>
             <p className="text-xs text-slate-500">Calm overview of your spending</p>
           </div>
         </div>
