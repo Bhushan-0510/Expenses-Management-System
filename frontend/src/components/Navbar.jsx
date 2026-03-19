@@ -17,7 +17,7 @@ export default function Navbar({ onLogout }) {
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="h-9 w-9 rounded-md overflow-hidden flex items-center justify-center">
-            <img src={logoSrc} alt="HisabKitab" className="h-8 w-9 object-cover" />
+            <img src={logoSrc} alt="" className="h-8 w-9 object-cover" />
           </div>
           <div>
             <p className="text-sm font-semibold text-slate-900">HisabKitab</p>

@@ -7,8 +7,12 @@ const PORT = process.env.PORT || 5000;
 
 async function start() {
   // Fail fast if required environment variables are missing
-  const required = ["MONGO_URI", "JWT_SECRET"];
+  const required = ["JWT_SECRET"];
   const missing = required.filter((k) => !process.env[k]);
+  // Accept either MONGO_URI or MONGODB_URI for compatibility
+  if (!process.env.MONGO_URI && !process.env.MONGODB_URI) {
+    missing.push("MONGO_URI (or MONGODB_URI)");
+  }
   if (missing.length) {
     // eslint-disable-next-line no-console
     console.error("Missing required environment variables:", missing.join(", "));

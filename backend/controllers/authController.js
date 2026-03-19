@@ -9,12 +9,16 @@ async function register(req, res, next) {
     if (existing) return res.status(409).json({ message: "Email already registered" });
 
     const user = await User.create({ email, password });
-    const token = signAccessToken(user._id);
+    let token;
+    try {
+      token = signAccessToken(user._id);
+    } catch (tokenErr) {
+      // eslint-disable-next-line no-console
+      console.error("Failed to sign access token:", tokenErr && tokenErr.stack ? tokenErr.stack : tokenErr);
+      return res.status(500).json({ message: "Failed to create access token" });
+    }
 
-    return res.status(201).json({
-      token,
-      user: { id: user._id, email: user.email }
-    });
+    return res.status(201).json({ token, user: { id: user._id, email: user.email } });
   } catch (err) {
     return next(err);
   }
