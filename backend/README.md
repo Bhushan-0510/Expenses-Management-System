@@ -49,7 +49,7 @@ Swagger UI (interactive docs): `GET /api-docs`
 ## Postman
 
 - Import `postman_collection.json` into Postman.
-- Set `baseUrl` collection variable to your server URL (e.g. `http://localhost:5000`).
+- Set `baseUrl` collection variable to your server URL (e.g. `https://expenses-management-system-ga8g.onrender.com`).
 - Call **Auth → Login** once; it will store `jwtToken` for subsequent protected requests.
 
 

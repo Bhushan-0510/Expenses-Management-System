@@ -12,7 +12,16 @@ const { notFoundHandler, errorHandler } = require("./middlewares/errorMiddleware
 
 const app = express();
 
-app.use(cors());
+// Configure CORS explicitly so the frontend can send Authorization header
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN || "*",
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: process.env.CORS_ALLOW_CREDENTIALS === "true"
+};
+app.use(cors(corsOptions));
+// Ensure preflight requests are handled
+app.options("*", cors(corsOptions));
 app.use(express.json({ limit: "1mb" }));
 app.use(morgan("dev"));
 

@@ -201,7 +201,7 @@
   "variable": [
     {
       "key": "baseUrl",
-      "value": "http://localhost:5000"
+      "value": "https://expenses-management-system-ga8g.onrender.com"
     },
     {
       "key": "jwtToken",

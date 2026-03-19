@@ -1,3 +1,5 @@
+import api from "./apiClient.js";
+
 const TOKEN_KEY = "pea_jwt";
 const USER_KEY = "pea_user";
 
@@ -43,50 +45,26 @@ export function clearToken() {
 }
 
 export async function register(email, password, remember = true) {
-  const res = await fetch("http://localhost:5000/api/auth/register", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
-  });
-
-  if (!res.ok) {
-    const data = await res.json().catch(() => ({}));
-    const message = data?.message || "Unable to register";
+  try {
+    const { data } = await api.post("/auth/register", { email, password });
+    if (data.token) setToken(data.token, remember);
+    if (data.user) setUser(data.user, remember);
+    return data;
+  } catch (err) {
+    const message = err?.response?.data?.message || err.message || "Unable to register";
     throw new Error(message);
   }
-
-  const data = await res.json();
-  if (data.token) {
-    setToken(data.token, remember);
-  }
-  if (data.user) {
-    setUser(data.user, remember);
-  }
-
-  return data;
 }
 
 export async function login(email, password, remember = true) {
-  const res = await fetch("http://localhost:5000/api/auth/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
-  });
-
-  if (!res.ok) {
-    const data = await res.json().catch(() => ({}));
-    const message = data?.message || "Unable to login";
+  try {
+    const { data } = await api.post("/auth/login", { email, password });
+    if (data.token) setToken(data.token, remember);
+    if (data.user) setUser(data.user, remember);
+    return data;
+  } catch (err) {
+    const message = err?.response?.data?.message || err.message || "Unable to login";
     throw new Error(message);
   }
-
-  const data = await res.json();
-  if (data.token) {
-    setToken(data.token, remember);
-  }
-  if (data.user) {
-    setUser(data.user, remember);
-  }
-
-  return data;
 }
 

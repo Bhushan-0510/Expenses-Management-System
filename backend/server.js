@@ -6,6 +6,14 @@ const connectDB = require("./config/db");
 const PORT = process.env.PORT || 5000;
 
 async function start() {
+  // Fail fast if required environment variables are missing
+  const required = ["MONGO_URI", "JWT_SECRET"];
+  const missing = required.filter((k) => !process.env[k]);
+  if (missing.length) {
+    // eslint-disable-next-line no-console
+    console.error("Missing required environment variables:", missing.join(", "));
+    process.exit(1);
+  }
   await connectDB();
   app.listen(PORT, () => {
     // eslint-disable-next-line no-console
